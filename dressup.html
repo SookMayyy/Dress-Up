@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+        <title>Dressup</title>
+        <link rel="stylesheet" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Pixelify Sans' rel='stylesheet'>
+    </head>
+
+    <body>
+        <div class="background" id="background"></div>
+
+            <div class="frame-wrapper">
+                <div class="frame">
+                    <div class="title gradient-box">Choose your outfit today! (˶ᵔ ᵕ ᵔ˶)</div>
+
+                    <div class="controls">
+                        <button class="arrow left">◀</button>
+
+                        <div class="character-container">
+                            <img src="image/helloKitty.png" class="character base" id="base-layer">
+                            <img src="" class="character outfit" id="outfit-layer">
+                            <img src="" class="character hat" id="hat-layer">
+                            <img src="" class="character bag" id="bag-layer">
+                        </div>
+
+                        <button class="arrow right">▶</button>
+                    </div>
+
+                    <div class="outfits">
+                        <!-- Character -->
+                        <button class="outfit-btn" data-type="character" data-name="helloKitty"> <img src="image/character.svg" class="outfitstyle"></button>
+                        <button class="outfit-btn" data-type="outfit" data-name="outfit"> <img src="image/dress.png" class="outfitstyle"></button>
+                        <button class="outfit-btn" data-type="hat" data-name="hat"> <img src="image/hat.png" class="outfitstyle"></button>
+                        <button class="outfit-btn" data-type="bag" data-name="bag"> <img src="image/bag.png" class="outfitstyle"></button>
+                    </div>
+
+                    <div class="bottom-bar gradient-box2">
+                        <!--<button class="button"> <img src="image/character.svg" class="imagestyle"></button>
+                        <button class="button"> <img src="image/dress.png" class="imagestyle"></button>
+                        <button class="button"> <img src="image/dress.png" class="imagestyle"></button>-->
+                    </div>
+                </div>
+            </div>
+
+    </body>
+
+    <!-- Script -->
+    <script>
+        // Track selected character
+        let selectedCharacter = "helloKitty";
+
+        const characters = {
+            helloKitty: {
+                base: "image/helloKitty.png",
+                width: 200,
+                top: 0,
+                offsets: {
+                    outfit: {
+                        outfit1: { width: 155, top: 134, left: 20},
+                        outfit2: { width: 140, top: 137, left: 26},
+                        outfit3: { width: 180, top: 130, left: 15}
+                    },
+                    hat: {
+                        hat1: {width: 150, top: 0, left: 45, rotate: -13},
+                        hat2: {width: 100, top: -5, left: 90, rotate: -8},
+                        hat3: {width: 190, top: -1, left: 10, rotate: 0}
+                    },
+                    bag: {
+                        bag1: { width: 100, top: 105, left: 140, rotate: 20},
+                        bag2: { width: 80, top: 145, left: 130, rotate: -15},
+                        bag3: { width: 60, top: 145, left: 140, rotate: -15}
+                    },
+                },
+                outfits: ["image/hk_dress1.png", "image/hk_dress2.png", "image/hk_dress3.png"],
+                hats: ["image/hk_hat1.png", "image/hk_hat2.png", "image/hk_hat3.png"],
+                bags: ["image/hk_bag1.png", "image/hk_bag2.png", "image/hk_bag3.png"]
+            },
+
+            pompompurin: {
+                base: "image/purin.png",
+                width: 230,
+                top: 0,
+                offsets: {
+                    outfit: {
+                        outfit1: { width: 210, top: 108, left: -1},
+                        outfit2: { width: 330, top: 83, left: -65, rotate: 13},
+                        outfit3: { width: 215, top: 100, left: -8}
+                    },
+                    hat: {
+                        hat1: {width: 85, top: -20, left: 65, rotate: 0},
+                        hat2: {width: 110, top: -10, left: 50, rotate: 32},
+                        hat3: {width: 110, top: -10, left: 50, rotate: 0}
+                    },
+                    bag: {
+                        bag1: { width: 80, top: 112, left: 134, rotate: 0},
+                        bag2: { width: 100, top: -10, left: 150, rotate: 0},
+                        bag3: { width: 100, top: 140, left: 150, rotate: 0},
+                    },
+                },
+                outfits: ["image/purin_dress1.png", "image/purin_dress2.png", "image/purin_dress3.png"],
+                hats: ["image/purin_hat1.png", "image/purin_hat2.png", "image/purin_hat3.png"],
+                bags: ["image/purin_bag1.png", "image/purin_bag2.png", "image/purin_bag3.png"]
+            },
+
+            cinnamoroll: {
+                base: "image/cinnamoroll.png",
+                width: 320,
+                top: 60,
+                offsets: {
+                    outfit: {
+                        outfit1: { width: 140, top: 138, left: 20},
+                        outfit2: { width: 140, top: 145, left: 28, rotate: -10},
+                        outfit3: { width: 160, top: 120, left: 0}
+                    },
+                    hat: {
+                        hat1: {width: 80, top: 55, left: 15, rotate: 0},
+                        hat2: {width: 150, top: 55, left: 8, rotate: -13},
+                        hat3: { width: 170, top: 30, left: 6, rotate: 0}
+                    },
+                    bag: {
+                        bag1: { width: 70, top: 82, left: 125, rotate: -20},
+                        bag2: { width: 200, top: -10, left: 70, rotate: 20},
+                        bag3: { width: 100, top: 148, left: 145, rotate: 0}
+                    },
+                },
+                outfits: ["image/cinnamoroll_dress1.png" , "image/cinnamoroll_dress2.png", "image/cinnamoroll_dress3.png"],
+                hats: ["image/cinnamoroll_hat1.png", "image/cinnamoroll_hat2.png", "image/cinnamoroll_hat3.png"],
+                bags: ["image/cinnamoroll_bag1.png", "image/cinnamoroll_bag2.png", "image/cinnamoroll_bag3.png"]
+            }
+        };
+
+        // Load character
+        const characterKeys = Object.keys(characters);
+        let currentCharIndex = 0;
+
+        function loadCharacter(name) {
+            selectedCharacter = name;
+
+            const baseImg = document.getElementById("base-layer");
+            baseImg.src = characters[name].base;
+            baseImg.style.width = characters[name].width + "px";
+            baseImg.style.top = characters[name].top + "px";
+
+            //document.querySelector("#base-layer").src = characters[name].base;
+            document.getElementById("outfit-layer").src = "";
+            document.getElementById("hat-layer").src = "";
+            document.getElementById("bag-layer").src = "";
+        }
+
+        // Update bottom bar with options
+        function updateBottomBar(type) {
+            const bar = document.querySelector(".bottom-bar");
+            bar.innerHTML = "";
+
+            if (type === "character") {
+                // show character choices
+                Object.keys(characters).forEach(name => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("button");
+
+                    const img = document.createElement("img");
+                    img.src = characters[name].base;
+                    img.classList.add("imagestyle");
+
+                    btn.appendChild(img);
+                    bar.appendChild(btn);
+
+                    btn.addEventListener("click", () => {
+                        loadCharacter(name);
+                    });
+                });
+            } else {
+                // show outfit/hat/bag options for selected character
+                const items = characters[selectedCharacter][type + "s"];
+                items.forEach((src, index) => {
+                    const btn = document.createElement("button");
+                    btn.classList.add("button");
+
+                    const img = document.createElement("img");
+                    img.src = src;
+                    img.classList.add("imagestyle");
+
+                    const itemName = type + (index + 1);
+
+                    btn.appendChild(img);
+                    bar.appendChild(btn);
+
+                    btn.addEventListener("click", () => {
+                        const layer = document.getElementById(`${type}-layer`);
+                        layer.src = src;
+
+                        const offsets = characters[selectedCharacter].offsets?.[type]?.[itemName];
+
+                        if (offsets) {
+                            layer.style.position = "absolute";
+                            layer.style.width = offsets.width + "px";
+                            layer.style.top = offsets.top + "px";
+                            layer.style.left = offsets.left + "px";
+                            layer.style.transform = offsets.rotate ? `rotate(${offsets.rotate}deg)` : "none";
+                        } else {
+                            layer.style.position = "static";
+                            layer.style.top = "0px";
+                            layer.style.left = "0px";
+                            layer.style.transform = "none";
+                        }
+                    });
+                });
+            }
+    }
+
+    const backgroundGIFs = [
+    "image/mtFujiiSpringBackground.gif",
+    "image/mtFujiiAutumnBackground.gif",
+    "image/mtFujiiWinterBackground.gif"
+    ];
+
+        // Handle category buttons
+        document.querySelectorAll(".outfit-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const type = btn.getAttribute("data-type");
+                updateBottomBar(type);
+            });
+        });
+
+        ["outfit-layer", "hat-layer", "bag-layer"].forEach(id => {
+            const el = document.getElementById(id);
+            el.src = "";
+            el.style.top = "0px";
+            el.style.left = "0px";
+        });
+    
+        let currentBgIndex = 0;
+
+    function updateBackground() {
+        const bgDiv = document.getElementById("background");
+        bgDiv.style.backgroundImage = `url(${backgroundGIFs[currentBgIndex]})`;
+        bgDiv.style.backgroundSize = "cover";
+        bgDiv.style.backgroundRepeat = "no-repeat";
+        bgDiv.style.backgroundPosition = "center";
+    }
+
+    document.querySelector(".arrow.left").addEventListener("click", () => {
+        currentBgIndex = (currentBgIndex - 1 + backgroundGIFs.length) % backgroundGIFs.length;
+        updateBackground();
+    });
+
+    document.querySelector(".arrow.right").addEventListener("click", () => {
+        currentBgIndex = (currentBgIndex + 1) % backgroundGIFs.length;
+        updateBackground();
+    });
+
+    // Call once on page load
+    updateBackground();
+
+    </script>
+
+</html>
